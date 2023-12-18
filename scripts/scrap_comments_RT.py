@@ -1,6 +1,7 @@
 import time
 
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 import pandas as pd
 from numpy.random import normal
 from selenium.webdriver.common.by import By

@@ -25,11 +25,13 @@ def make_driver() -> webdriver:
             renderer="Intel Iris OpenGL Engine",
             fix_hairline=True)
 
-    print("Driver créé")
-
     return driver
 
 def login_to_pj(driver: webdriver.Chrome, url: str) -> webdriver.Chrome:
     driver.get(url)
-    print("La page a été chargée")
     return driver
+
+def modify_links(url):
+    extracted_part = url.split("?")[0]
+    good_url = "https://www.imdb.com" + extracted_part + "reviews?ref_=tt_urv"
+    return(good_url)
