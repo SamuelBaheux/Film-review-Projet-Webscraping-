@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium_stealth import stealth
 
-
 def make_driver() -> webdriver:
     """Instantiate the webdriver with Selenium."""
     chrome_options = webdriver.ChromeOptions()
@@ -27,11 +26,17 @@ def make_driver() -> webdriver:
 
     return driver
 
+
 def login_to_pj(driver: webdriver.Chrome, url: str) -> webdriver.Chrome:
     driver.get(url)
     return driver
 
-def modify_links(url):
+def modify_links_comments(url):
     extracted_part = url.split("?")[0]
     good_url = "https://www.imdb.com" + extracted_part + "reviews?ref_=tt_urv"
+    return(good_url)
+
+def modify_links_image(url):
+    extracted_part = url.split("?")[0]
+    good_url = "https://www.imdb.com" + extracted_part
     return(good_url)

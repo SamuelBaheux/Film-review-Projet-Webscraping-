@@ -1,2 +1,0 @@
-# Webscraping
-Projet python avancé
