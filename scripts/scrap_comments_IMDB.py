@@ -31,7 +31,6 @@ def scrape_films_links(driver, nbr_film):
 
 def scrape_comments(driver, json_output_file, n_pages):
     for _ in range(0, n_pages):
-
         try:
             load_more_button = driver.find_element(By.ID, 'load-more-trigger')
             driver.execute_script("arguments[0].click();", load_more_button)
