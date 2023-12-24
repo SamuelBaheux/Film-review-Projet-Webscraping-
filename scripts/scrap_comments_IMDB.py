@@ -118,13 +118,16 @@ def get_all_comments_images():
     dic_links, dic_images = get_dic_of_links()
     driver = make_driver()
 
+    print("Récupération des images et des liens des trailers ...")
     for title,link in tqdm(dic_images.items()):
         get_images_film(link, driver, title)
         get_trailer_film(link, driver, title)
+    print("Images et des liens des trailers obtenus ✅")
 
+    print("Récupération des commentaires")
     for title,link in tqdm(dic_links.items()):
         get_comment_film(link, driver, title)
-
+    print("Commentaires obtenus ✅")
 
 if __name__ == "__main__":
     get_all_comments_images()
