@@ -21,7 +21,7 @@ De plus, vous pouvez explorer les meilleurs et pires commentaires d'utilisateurs
 2. Exécutez l'application :
 
     ```bash
-    streamlit run app.py
+    streamlit run ./scripts/app.py  
     ```
 
 3. Accédez à l'application dans votre navigateur web à l'URL fournie.

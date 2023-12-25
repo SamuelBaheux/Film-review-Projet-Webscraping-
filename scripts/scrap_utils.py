@@ -28,15 +28,43 @@ def make_driver() -> webdriver:
 
 
 def login_to_pj(driver: webdriver.Chrome, url: str) -> webdriver.Chrome:
+    """
+    Navigue vers l'URL spécifiée en utilisant un pilote de navigateur Chrome.
+
+    Parameters:
+    - driver (webdriver.Chrome): Le pilote de navigateur Chrome.
+    - url (str): L'URL de la page vers laquelle naviguer.
+
+    Returns:
+    - webdriver.Chrome: Le pilote de navigateur Chrome après avoir navigué vers l'URL spécifiée.
+    """
     driver.get(url)
     return driver
 
 def modify_links_comments(url):
+    """
+      Modifie un lien IMDb pour rediriger vers la page des commentaires du film.
+
+      Parameters:
+      - url (str): Le lien IMDb original.
+
+      Returns:
+      - str: Le lien modifié redirigeant vers la page des commentaires du film.
+      """
     extracted_part = url.split("?")[0]
     good_url = "https://www.imdb.com" + extracted_part + "reviews?ref_=tt_urv"
     return(good_url)
 
 def modify_links_image(url):
+    """
+    Modifie un lien IMDb pour rediriger vers la page d'image du film.
+
+    Parameters:
+    - url (str): Le lien IMDb original.
+
+    Returns:
+    - str: Le lien modifié redirigeant vers la page d'image du film.
+    """
     extracted_part = url.split("?")[0]
     good_url = "https://www.imdb.com" + extracted_part
     return(good_url)
