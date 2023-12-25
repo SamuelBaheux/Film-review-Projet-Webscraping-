@@ -2,34 +2,32 @@ import os
 
 import streamlit as st
 
-from utils import get_infos_fim, get_link_by_movie_name
+from app_utils import get_infos_fim, get_link_by_movie_name, get_example_comments
 
 image_extensions = ["png", "jpg", "jpeg", "gif"]
-
-comm =     "I watched this with my wife who was ready to turn it off after about ten minutes, but I talked her into watching it - \"It'll get better, honey. They'll be going into the real world, soon.\"Well, it didn't get better, after they went into the real world. I feel like it was a better show in Barbieland where it seemed more realistic.There isn't anything wrong with the acting or production, but the script is weak, particularly when they get to the real world. People just don't act like that. I'm disappointed for the actors, I think they thought it would be a great movie, however it's much more of a letdown.",
 
 
 
 def main():
     st.markdown("<h1 style='text-align: center; margin-bottom: 40px;'>🍿Film Review 🎬</h1>", unsafe_allow_html=True)
     text = """
-# Bienvenue dans Film Review !
+Bienvenue dans Film Review !
 
 Votre application personnelle de notation de film. Pour chaque film, découvrez trois informations clés :
 - **Note basée sur les avis d'IMDB**
 - **Pourcentage d'avis positifs**
 - **Lien vers la bande-annonce**
 
-Vous pourrez également lire le meilleur et le pire commentaire (au sens de notre modèle de sentiment) pour découvrir
-l'avis des internautes !
-"""
+Vous pourrez également lire le meilleur et le pire commentaire (au sens de notre modèle de sentiment) pour 
+découvrir l'avis des internautes !
+            """
 
 
     st.markdown(f"<h6 margin-bottom: 30px;'>{text}</h5>", unsafe_allow_html=True)
 
 
-    images_folder = 'images'
-    images_list = os.listdir("images")
+    images_folder = './data/images'
+    images_list = os.listdir(images_folder)
 
     images_list = [image for image in images_list if any(image.endswith(ext) for ext in image_extensions)]
     images_list.sort()
@@ -51,11 +49,13 @@ l'avis des internautes !
                 button_key = f"button_{image_index}"
 
                 if cols[col_index].button(f"Plus d'informations", key=button_key):
-                    note, pcentage = get_infos_fim(images_list[image_index].split('.jpg')[0])
-                    lien = get_link_by_movie_name(images_list[image_index].split('.jpg')[0])
+                    movie_title = images_list[image_index].split('.jpg')[0]
+                    note, pcentage = get_infos_fim(movie_title)
+                    lien = get_link_by_movie_name(movie_title)
+                    pos_com, neg_com = get_example_comments(movie_title)
 
                     st.markdown("<h3 style='text-align: center; margin-bottom: 40px;'>"
-                                f'🎬 {images_list[image_index].split(".jpg")[0]} 🎬'
+                                f'🎬 {movie_title} 🎬'
                                 "</h1>",
                                 unsafe_allow_html=True)
                     st.markdown("<h6 >"
@@ -71,16 +71,15 @@ l'avis des internautes !
                                 "</h6>",
                                 unsafe_allow_html=True)
 
-                    st.markdown(f"<h6 style='margin-bottom: 10px'>"
-                                f"✅ Meilleur Commentaire : {comm}"
-                                "</h6>",
+                    st.markdown(f"<p style='text-align: justify; margin-bottom: 10px'>"
+                                f"✅ Meilleur Commentaire : {pos_com}"
+                                "</p>",
                                 unsafe_allow_html=True)
 
-                    st.markdown(f"<h6 style='margin-bottom: 40px'>"
-                                f"❌ Pire Commentaire : {comm}"
-                                "</h6>",
+                    st.markdown(f"<p style='text-align: justify; margin-bottom: 40px'>"
+                                f"❌ Pire Commentaire : {neg_com}"
+                                "</p>",
                                 unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     main()
